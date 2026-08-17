@@ -63,7 +63,7 @@ export abstract class BaseTool {
     } else if (schema instanceof z.ZodArray) {
       return { 
         type: 'array',
-        items: this.zodTypeToJsonSchema(schema.element),
+        items: this.zodTypeToJsonSchema(schema.element as z.ZodType<any>),
       };
     } else if (schema instanceof z.ZodObject) {
       const objectSchema = this.zodToJsonSchema(schema);
@@ -72,7 +72,7 @@ export abstract class BaseTool {
         ...objectSchema,
       };
     } else if (schema instanceof z.ZodOptional) {
-      return this.zodTypeToJsonSchema(schema.unwrap());
+      return this.zodTypeToJsonSchema(schema.unwrap() as z.ZodType<any>);
     } else if (schema instanceof z.ZodEnum) {
       return {
         type: 'string',

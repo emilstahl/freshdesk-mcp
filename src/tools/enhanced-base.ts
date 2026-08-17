@@ -164,7 +164,7 @@ export abstract class EnhancedBaseTool {
     } else if (schema instanceof z.ZodArray) {
       result = { 
         type: 'array',
-        items: this.zodTypeToJsonSchema(schema.element),
+        items: this.zodTypeToJsonSchema(schema.element as z.ZodType<any>),
       };
     } else if (schema instanceof z.ZodObject) {
       const objectSchema = this.zodToJsonSchema(schema);
@@ -173,7 +173,7 @@ export abstract class EnhancedBaseTool {
         ...objectSchema,
       };
     } else if (schema instanceof z.ZodOptional) {
-      result = this.zodTypeToJsonSchema(schema.unwrap());
+      result = this.zodTypeToJsonSchema(schema.unwrap() as z.ZodType<any>);
     } else if (schema instanceof z.ZodEnum) {
       result = {
         type: 'string',

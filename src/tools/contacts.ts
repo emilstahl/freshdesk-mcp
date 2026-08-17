@@ -20,7 +20,7 @@ const CreateContactSchema = z.object({
   language: z.string().optional().describe('Preferred language (e.g., "en", "fr")'),
   time_zone: z.string().optional().describe('Time zone (e.g., "Eastern Time (US & Canada)")'),
   tags: z.array(z.string()).optional().describe('Tags for the contact'),
-  custom_fields: z.record(z.any()).optional().describe('Custom fields as key-value pairs'),
+  custom_fields: z.record(z.string(), z.any()).optional().describe('Custom fields as key-value pairs'),
 });
 
 const UpdateContactSchema = z.object({
@@ -41,7 +41,7 @@ const UpdateContactSchema = z.object({
   language: z.string().optional().describe('Preferred language'),
   time_zone: z.string().optional().describe('Time zone'),
   tags: z.array(z.string()).optional().describe('Tags for the contact'),
-  custom_fields: z.record(z.any()).optional().describe('Custom fields as key-value pairs'),
+  custom_fields: z.record(z.string(), z.any()).optional().describe('Custom fields as key-value pairs'),
 });
 
 const ListContactsSchema = z.object({

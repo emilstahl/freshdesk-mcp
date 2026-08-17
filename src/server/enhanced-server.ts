@@ -96,13 +96,13 @@ export class EnhancedFreshdeskServer {
         this.logger.info('Discovering user permissions...');
         try {
           this.userPermissions = await this.permissionDiscovery.discoverUserPermissions();
-          this.logger.info('Permission discovery completed', {
+          this.logger.info({
             accessLevel: this.userPermissions.accessLevel,
             isReadOnly: this.userPermissions.isReadOnly,
             permissionCount: this.userPermissions.permissions.size,
-          });
+          }, 'Permission discovery completed');
         } catch (error) {
-          this.logger.warn('Permission discovery failed, proceeding with default permissions', error);
+          this.logger.warn({ err: error }, 'Permission discovery failed, proceeding with default permissions');
           // Create default permissions if discovery fails
           this.userPermissions = this.createDefaultPermissions();
         }
@@ -116,7 +116,7 @@ export class EnhancedFreshdeskServer {
 
       this.logger.info('Enhanced Freshdesk MCP Server initialized successfully');
     } catch (error) {
-      this.logger.fatal('Failed to initialize server', error);
+      this.logger.fatal({ err: error }, 'Failed to initialize server');
       throw error;
     }
   }
@@ -203,7 +203,7 @@ export class EnhancedFreshdeskServer {
         return result;
       } catch (error) {
         this.metrics.requestsFailed++;
-        this.logger.error('Tool execution failed', error);
+        this.logger.error({ err: error }, 'Tool execution failed');
         
         if (error instanceof ProtocolError || error instanceof ToolExecutionError) {
           throw error;
@@ -282,7 +282,7 @@ export class EnhancedFreshdeskServer {
         registeredCount++;
         this.logger.debug(`${tool.name} registered successfully`);
       } catch (error) {
-        this.logger.error(`Failed to register ${tool.name}:`, error);
+        this.logger.error({ err: error }, `Failed to register ${tool.name}`);
       }
     }
 
@@ -303,7 +303,7 @@ export class EnhancedFreshdeskServer {
       await this.server.connect(this.transport);
       this.logger.info('Enhanced Freshdesk MCP Server started successfully');
     } catch (error) {
-      this.logger.fatal('Failed to start server', error);
+      this.logger.fatal({ err: error }, 'Failed to start server');
       throw error;
     }
   }
@@ -318,7 +318,7 @@ export class EnhancedFreshdeskServer {
 
       this.logger.info('Enhanced Freshdesk MCP Server stopped successfully');
     } catch (error) {
-      this.logger.error('Error while stopping server', error);
+      this.logger.error({ err: error }, 'Error while stopping server');
       throw error;
     }
   }

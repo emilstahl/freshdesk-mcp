@@ -22,11 +22,11 @@ export class PermissionDiscoveryService {
     const testResults = await this.runPermissionTests();
     const permissions = this.analyzeTestResults(testResults);
 
-    this.logger.info('Permission discovery completed', {
+    this.logger.info({
       accessLevel: permissions.accessLevel,
       permissionCount: permissions.permissions.size,
       capabilities: permissions.capabilities,
-    });
+    }, 'Permission discovery completed');
 
     return permissions;
   }
