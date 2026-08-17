@@ -84,7 +84,7 @@
     "lru-cache": "^10.0.1",
     "pino": "^8.16.0",
     "pino-pretty": "^10.2.3",
-    "zod": "^3.22.0"
+    "zod": "^4.4.0"
   },
   "overrides": {
     "@typescript-eslint/typescript-estree": {
