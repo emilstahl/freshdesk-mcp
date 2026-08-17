@@ -74,7 +74,7 @@
     "url": "https://github.com/Enreign/freshdeck-mcp/issues"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
@@ -94,8 +94,7 @@
     "hono": "4.12.27",
     "qs": "6.15.2",
     "js-yaml": "4.2.0",
-    "@babel/core": "7.29.6",
-    "raw-body@<4.0.0": "4.0.0"
+    "@babel/core": "7.29.6"
   },
   "devDependencies": {
     "@types/jest": "^29.5.8",
