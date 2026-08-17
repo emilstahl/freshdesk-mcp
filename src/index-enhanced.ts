@@ -32,7 +32,7 @@ function loadConfiguration(): FreshdeskConfig {
       rateLimitPerMinute: env.FRESHDESK_RATE_LIMIT ? parseInt(env.FRESHDESK_RATE_LIMIT, 10) : 50,
     };
   } catch (error) {
-    logger.error('Configuration error:', error);
+    logger.error({ err: error }, 'Configuration error');
     throw new Error('Invalid configuration. Please check your environment variables.');
   }
 }
@@ -54,9 +54,9 @@ async function main() {
     
     // Log server health
     const health = server.getHealth();
-    logger.info('Server health:', health);
+    logger.info({ health }, 'Server health');
   } catch (error) {
-    logger.error('Failed to start server:', error);
+    logger.error({ err: error }, 'Failed to start server');
     process.exit(1);
   }
 }
@@ -74,12 +74,12 @@ process.on('SIGTERM', async () => {
 
 // Handle uncaught errors
 process.on('uncaughtException', (error) => {
-  logger.fatal('Uncaught exception:', error);
+  logger.fatal({ err: error }, 'Uncaught exception');
   process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-  logger.fatal('Unhandled rejection at:', promise, 'reason:', reason);
+  logger.fatal({ err: reason, promise: String(promise) }, 'Unhandled rejection');
   process.exit(1);
 });
 

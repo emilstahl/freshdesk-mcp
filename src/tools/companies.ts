@@ -12,7 +12,7 @@ const CreateCompanySchema = z.object({
   account_tier: z.string().optional().describe('Account tier (e.g., "Premium", "Enterprise")'),
   renewal_date: z.string().optional().describe('Contract renewal date'),
   industry: z.string().optional().describe('Industry sector'),
-  custom_fields: z.record(z.any()).optional().describe('Custom fields as key-value pairs'),
+  custom_fields: z.record(z.string(), z.any()).optional().describe('Custom fields as key-value pairs'),
 });
 
 const UpdateCompanySchema = z.object({
@@ -25,7 +25,7 @@ const UpdateCompanySchema = z.object({
   account_tier: z.string().optional().describe('Account tier'),
   renewal_date: z.string().optional().describe('Contract renewal date'),
   industry: z.string().optional().describe('Industry sector'),
-  custom_fields: z.record(z.any()).optional().describe('Custom fields as key-value pairs'),
+  custom_fields: z.record(z.string(), z.any()).optional().describe('Custom fields as key-value pairs'),
 });
 
 const ListCompaniesSchema = z.object({

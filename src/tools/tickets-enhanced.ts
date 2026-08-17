@@ -15,7 +15,7 @@ const TicketsManageSchema = z.object({
     source: z.number().min(1).max(10).describe('Source: 1=Email, 2=Portal, 3=Phone, 7=Chat, 8=Mobihelp, 9=Feedback Widget, 10=Outbound Email').optional(),
     tags: z.array(z.string()).describe('Tags for the ticket').optional(),
     cc_emails: z.array(z.string().email()).describe('Email addresses to CC').optional(),
-    custom_fields: z.record(z.any()).describe('Custom fields as key-value pairs').optional(),
+    custom_fields: z.record(z.string(), z.any()).describe('Custom fields as key-value pairs').optional(),
     group_id: z.number().describe('Group ID to assign the ticket').optional(),
     responder_id: z.number().describe('Agent ID to assign the ticket').optional(),
     type: z.string().describe('Ticket type').optional(),

@@ -15,7 +15,7 @@ const CompaniesManageSchema = z.object({
     account_tier: z.enum(['Basic', 'Premium', 'Enterprise']).describe('Account tier').optional(),
     renewal_date: z.string().describe('ISO 8601 date for renewal').optional(),
     industry: z.string().describe('Industry the company belongs to').optional(),
-    custom_fields: z.record(z.any()).describe('Custom fields as key-value pairs').optional(),
+    custom_fields: z.record(z.string(), z.any()).describe('Custom fields as key-value pairs').optional(),
     
     // Update/get/delete specific
     company_id: z.number().describe('ID of the company').optional(),

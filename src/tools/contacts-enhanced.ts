@@ -19,7 +19,7 @@ const ContactsManageSchema = z.object({
     language: z.string().describe('Language code (e.g., "en", "fr")').optional(),
     time_zone: z.string().describe('Time zone (e.g., "Eastern Time (US & Canada)")').optional(),
     tags: z.array(z.string()).describe('Tags for the contact').optional(),
-    custom_fields: z.record(z.any()).describe('Custom fields as key-value pairs').optional(),
+    custom_fields: z.record(z.string(), z.any()).describe('Custom fields as key-value pairs').optional(),
     address: z.string().describe('Address of the contact').optional(),
     
     // Update/get/delete specific

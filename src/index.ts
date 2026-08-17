@@ -80,7 +80,7 @@ class FreshdeskMCPServer {
         rateLimitPerMinute: env.FRESHDESK_RATE_LIMIT ? parseInt(env.FRESHDESK_RATE_LIMIT, 10) : 50,
       };
     } catch (error) {
-      logger.error('Configuration error:', error);
+      logger.error({ err: error }, 'Configuration error');
       throw new Error('Invalid configuration. Please check your environment variables.');
     }
   }
@@ -120,7 +120,7 @@ class FreshdeskMCPServer {
       }
 
       try {
-        logger.debug(`Executing tool: ${name}`, { args });
+        logger.debug({ args }, `Executing tool: ${name}`);
         const result = await tool.execute(args);
         return {
           content: [
@@ -131,7 +131,7 @@ class FreshdeskMCPServer {
           ],
         };
       } catch (error) {
-        logger.error(`Tool execution error for ${name}:`, error);
+        logger.error({ err: error }, `Tool execution error for ${name}`);
         return {
           content: [
             {
@@ -169,7 +169,7 @@ class FreshdeskMCPServer {
         process.exit(1);
       }
     } catch (error) {
-      logger.error('Connection test failed:', error);
+      logger.error({ err: error }, 'Connection test failed');
       process.exit(1);
     }
   }
@@ -186,7 +186,7 @@ async function main() {
     // Start the server
     await server.start();
   } catch (error) {
-    logger.error('Failed to start server:', error);
+    logger.error({ err: error }, 'Failed to start server');
     process.exit(1);
   }
 }
