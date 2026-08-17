@@ -10,14 +10,18 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: ['20.x', '22.x']
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v7
 
-    - name: Use Node.js 20.x
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v6
       with:
-        node-version: '20.x'
+        node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
     - name: Install dependencies
@@ -36,6 +40,7 @@ jobs:
       run: npm run test:security
 
     - name: Upload coverage to Coveralls
+      if: matrix.node-version == '20.x'
       uses: coverallsapp/github-action@8d6379e14d29928660c4ba802d8e85393440b329 # v2.3.8
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
