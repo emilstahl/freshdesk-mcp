@@ -77,12 +77,12 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.26.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "axios": "1.18.1",
     "dotenv": "^16.5.0",
     "jsonschema": "^1.4.1",
     "lru-cache": "^10.0.1",
-    "pino": "^8.16.0",
+    "pino": "^10.1.1",
     "pino-pretty": "^10.2.3",
     "zod": "^4.4.0"
   },
@@ -94,7 +94,8 @@
     "hono": "4.12.27",
     "qs": "6.15.2",
     "js-yaml": "4.2.0",
-    "@babel/core": "7.29.6"
+    "@babel/core": "7.29.6",
+    "raw-body@<4.0.0": "4.0.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.8",
